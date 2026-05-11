@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Calculator</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator-card">
+            <h1 class="card-title">Mini Calculator</h1>
+
+            <div class="inputs-container">
+                <input type="number" id="num1" value="45" placeholder="ပထမဂဏန်း">
+
+                <select id="operator">
+                    <option value="+">+</option>
+                    <option value="-">-</option>
+                    <option value="*">*</option>
+                    <option value="/">/</option>
+                </select>
+
+                <input type="number" id="num2" value="45" placeholder="ဒုတိယဂဏန်း">
+            </div>
+
+            <button id="calculateBtn" class="calculate-btn">Calculate Amount</button>
+
+            <div class="result-container">
+                <span class="result-label">Result:</span>
+                <span id="resultValue" class="result-value"></span>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        // DOM elements ကို select လုပ်မယ်
+        const num1Input = document.getElementById('num1');
+        const num2Input = document.getElementById('num2');
+        const operatorSelect = document.getElementById('operator');
+        const calculateBtn = document.getElementById('calculateBtn');
+        const resultValueDisplay = document.getElementById('resultValue');
+
+        // Calculate function
+        function calculate() {
+            const num1 = parseFloat(num1Input.value);
+            const num2 = parseFloat(num2Input.value);
+            const operator = operatorSelect.value;
+            let result;
+
+            // // input checks (not present in screenshot logic but good practice for any calculator)
+            // if (isNaN(num1) || isNaN(num2)) {
+            //     resultValueDisplay.textContent = 'Invalid Input';
+            //     resultValueDisplay.style.color = 'red';
+            //     return;
+            // }
+
+            // operator control logic (generic calculator logic)
+            switch (operator) {
+                case '+':
+                    result = num1 + num2;
+                    break;
+                case '-':
+                    result = num1 - num2;
+                    break;
+                case '*':
+                    result = num1 * num2;
+                    break;
+                case '/':
+                    // Handle division by zero
+                    if (num2 === 0) {
+                        resultValueDisplay.textContent = 'Error';
+                        resultValueDisplay.style.color = 'red';
+                        return;
+                    }
+                    result = num1 / num2;
+                    break;
+                default:
+                    result = 'Error';
+            }
+
+            // result format (result logic screenshot for generic calculations)
+            resultValueDisplay.textContent = result;
+            resultValueDisplay.style.color = 'green';
+        }
+
+        // Button click event listener
+        calculateBtn.addEventListener('click', calculate);
+
+        // (Optional) Initial values တွေနဲ့ default calculation results screenshot shown correct form
+        // load initial state based on values 45, +, 45
+        resultValueDisplay.textContent = '90';
+        num1Input.value = '45';
+        num2Input.value = '45';
+        operatorSelect.value = '+';
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+</head>
+<style>
+    .container {
+        width: 450px;
+        background-color: azure;
+        border: solid;
+        margin: auto;
+        padding: 30px;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    .calculate {
+        padding: 10px;
+    }
+
+    button {
+        padding: 10px;
+        margin: 10px;
+        width: 90%;
+        background-color: aqua;
+        border-style: hidden;
+    }
+
+    input {
+        padding: 10px;
+
+    }
+
+    .result-value {
+        padding: 10px;
+        margin: 10px;
+
+    }
+
+    .result {
+        padding: 10px;
+        width: 90%;
+        border: 2px solid grey;
+
+    }
+</style>
+
+<body class="container">
+    <h1>
+        Mini Calculator
+    </h1>
+
+    <div class=" calculate">
+        <input type="number" id="num1">
+        <select id="selector">
+            <option>+</option>
+            <option>-</option>
+            <option>*</option>
+            <option>%</option>
+        </select>
+        <input type="number" id="num2">
+    </div>
+    <div>
+        <button id="calculateBtn">Calculate Amount</button>
+    </div>
+    <div class="result">
+        <span>Result:</span>
+        <span id="resultValue" class="result-value"></span>
+    </div>
+</body>
+<script>
+    const inputNum1 = document.getElementById('num1');
+    const inputNum2 = document.getElementById('num2');
+    const operator = document.getElementById('selector');
+    const resultValue = document.getElementById('resultValue');
+
+    function calculate() {
+
+        const num1 = parseFloat(inputNum1.value);
+        const num2 = parseFloat(inputNum2.value);
+        const selector = operator.value;
+
+            if(isNaN(num1) || isNaN(num2)){
+                resultValue.textContent = "Please Enter a number"; 
+                return;
+            }
+    let result=0;
+        switch (selector) {
+            case '+':
+                result = num1 + num2;
+                break;
+            case '-':
+                result = num1 - num2;
+                break;
+            case '*':
+                result = num1 * num2;
+                break;
+            case '%':
+                if (num2 === 0) {
+                    resultValue.textContent = 'error';
+                    return;
+                }
+                result = num1 / num2;
+                break;
+            default:
+                result = 'Error';
+        }
+
+        resultValue.textContent = result;
+    }
+    
+    calculateBtn.addEventListener('click', calculate);
+
+    resultValue.textContent = '90';
+    inputNum1.value = '45';
+    inputNum2.value = '45';
+    operator.value = '+';
+
+</script>
+
+</html>

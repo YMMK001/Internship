@@ -1,0 +1,104 @@
+ * {
+     padding: 0;
+     margin: 0;
+     box-sizing: border-box;
+ }
+
+ .container {
+     max-width: 1000px;
+     background-color: rgb(221, 232, 229);
+     margin: auto;
+     margin-top: 20px;
+
+ }
+
+ header {
+     padding: 10px 0px 10px 0px;
+ }
+
+ .nav-var {
+     background-color: black;
+     padding: 10px;
+     color: aliceblue;
+ }
+
+ #home {
+     display: flex;
+     float: right;
+ }
+
+ a {
+     padding-left: 20px;
+     text-decoration: none;
+     color: aliceblue;
+ }
+
+ .card {
+     display: grid;
+     grid-template-columns: auto auto auto;
+     background-color: rgb(221, 232, 229);
+     padding: 10px;
+     gap: 30px;
+ }
+
+ .card div {
+     background-color: rgb(144, 235, 253);
+     padding: 10px;
+     text-align: center;
+     border-radius: 3px;
+ }
+
+ .dropdown {
+     display: flex;
+     flex-direction: row;
+ }
+
+ .utility {
+     background-color: rgb(225, 234, 241);
+     display: flex;
+     flex-direction: column;
+     margin-top: 10px;
+     width: 500px;
+     padding: 10px;
+     box-shadow: 1px 0px 1px 1px rgb(167, 165, 165);
+     border-radius: 5px;
+ }
+
+ label {
+     padding-top: 5px;
+ }
+
+ #drop {
+     padding: 7px;
+     border-radius: 5px;
+ }
+
+ div .postcard {
+     width: 500px;
+     background-color: rgb(225, 234, 241);
+     text-align: center;
+     padding: 120px 70px 95px 70px;
+     margin-top: 10px;
+     margin-left: 20px;
+     border-radius: 5px;
+     box-shadow: 1px 0px 1px 1px rgb(167, 165, 165);
+     color: aliceblue;
+ }
+
+
+ .postcard p {
+     padding: 20px 5px 20px 5px;
+     background-color: rgb(55, 120, 232);
+ }
+
+ .but {
+     padding: 10px;
+ }
+
+ button {
+     padding: 7px;
+     background-color: rgb(0, 157, 255);
+     color: aliceblue;
+     border-style: hidden;
+     border-radius: 5px;
+ }

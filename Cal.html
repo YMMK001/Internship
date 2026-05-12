@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phone Calculator</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+  <style>
+    *,
+    *::after,
+    *::before {
+      margin: 0;
+      padding: 0px;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: beige;
+      display: flex;
+      height: 400px;
+    }
+    .calculator {
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: aliceblue;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    .calculator .display {
+      width: 350px;
+      height: 50px;
+      border-radius: 10px;
+      border: none;
+      background-color: aliceblue;
+      text-indent: 10px;
+      font-size: 3rem;
+      color: black;
+    }
+    .calculator .keys {
+      width: 100%;
+      display: grid;
+      grid-template-rows: repeat(5, 60px);
+      grid-template-columns: repeat(4, 60px);
+      gap: 20px;
+      padding-block-start: 20px;
+    }
+    .keys button {
+      border-radius: 10px;
+      font-size: 1.7rem;
+      border: none;
+      box-shadow: 5px 5px 5px 2px rgba(0, 0, 0, 0.2);
+      transition: 0.3s;
+      cursor: pointer;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 700px;
+    }
+    button:active {
+      scale: 0.95;
+    }
+    .keys .actions_btns {
+      color: dodgerblue;
+    }
+    .keys .actions_btns:last-child {
+      grid-column: 4/5;
+    }
+  </style>
+  <body>
+    <div class="calculator">
+      <input type="text" class="display" readonly />
+      <div class="keys">
+        <button class="actions_btns" onclick="clearDisplay()">C</button>
+        <button class="actions_btns" onclick="deleteLast()">
+          <i class="fa-solid fa-delete-left"></i>
+        </button>
+        <button class="actions_btns" onclick="appendToDisplay('%')">%</button>
+        <button class="actions_btns" onclick="appendToDisplay('/')">
+          <i class="fa-solid fa-divide"></i>
+        </button>
+
+        <button onclick="appendToDisplay('7')">7</button>
+        <button onclick="appendToDisplay('8')">8</button>
+        <button onclick="appendToDisplay('9')">9</button>
+        <button class="actions_btns" onclick="appendToDisplay('*')">
+          <i class="fa-solid fa-multiply"></i>
+        </button>
+
+        <button onclick="appendToDisplay('4')">4</button>
+        <button onclick="appendToDisplay('5')">5</button>
+        <button onclick="appendToDisplay('6')">6</button>
+        <button class="actions_btns" onclick="appendToDisplay('-')">
+          <i class="fa-solid fa-minus"></i>
+        </button>
+
+        <button onclick="appendToDisplay('1')">1</button>
+        <button onclick="appendToDisplay('2')">2</button>
+        <button onclick="appendToDisplay('3')">3</button>
+        <button class="actions_btns" onclick="appendToDisplay('+')">
+          <i class="fa-solid fa-plus"></i>
+        </button>
+
+        <button onclick="appendToDisplay('()')">()</button>
+        <button onclick="appendToDisplay('0')">0</button>
+        <button onclick="appendToDisplay('.')">.</button>
+        <button class="actions_btns" onclick="calculate('=')">=</button>
+      </div>
+    </div>
+    <script>
+      const display = document.querySelector(".display");
+      function appendToDisplay(inputValue) {
+        display.value += inputValue;
+      }
+      function calculate() {
+        try {
+          display.value = eval(display.value);
+        } catch (error) {
+          display.value = "Error";
+        }
+      }
+      function clearDisplay() {
+        display.value = "";
+      }
+      function deleteLast() {
+        display.value = display.value.slice(0, -1);
+      }
+    </script>
+  </body>
+</html>

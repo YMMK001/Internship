@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<body >
+    <div class="bg-green-50 mx-auto p-4 max-w-4xl" >
+        
+   <header class="p-2">
+        <h1 class="font-bold text-2xl">CSS Utility Simulator</h1>
+        <p>Change the inputs below to see how atomic classes combine to build UIs</p>
+    </header>
+
+    <!-- Navigation-->
+    <nav class="bg-[#000000] p-2">
+        <span class="font-bold text-white">My Logo</span>
+        <span class="pl-[60%] text-white" >
+            <a href="" class="p-2 ">Home</a>
+            <a href="" class="p-2">About</a>
+            <a href="" class="p-2">Contact</a>
+        </span>
+    </nav>
+
+    <!-- Feature-->
+    <div class=" flex justify-between p-2">
+        <div class="bg-[#00BFFF] p-4 rounded-md w-1/4 text-center">Feature 1</div>
+        <div class="bg-[#00BFFF] p-4 rounded-md w-1/4 text-center">Feature 2</div>
+        <div class="bg-[#00BFFF] p-4 rounded-md w-1/4 text-center">Feature 3</div>
+    </div>
+
+    <!--  Dropdown-->
+    <div class=" flex grid-cols-2 gap-2 ">
+ 
+        <div class="bg-[#E6E6FA] flex flex-col w-1/2 p-2 gap-2 rounded-md">
+
+            <h2 class="font-bold" >Utility Controls</h2>
+ 
+            <label>Padding (Spacing)</label>
+            <select value="Medium (p)" id="drop"  class="p-1 rounded-md">
+                <option value="Medium">Medium (p)</option>
+            </select>
+
+            <label>Background Theme (Colors)</label>
+            <select value="Primary Blue" id="drop" class="p-1 rounded-md">
+                <option value="Medium">Primary Blue</option>
+            </select>
+
+            <label>Text Size (Typography)</label>
+            <select value="large (text-xl)" id="drop" class="p-1 rounded-md">
+                <option value="Medium">large (text-xl)</option>
+            </select>
+
+            <label>Corner Radius (Borders)</label>
+            <select value="Square (rounded-none)" id="drop" class="p-1 rounded-md">
+                <option value="Medium">Square (rounded-none)</option>
+            </select>
+
+            <label>Shadow (Depth)</label>
+            <select value="Medium (Shadow-md)" id="drop" class="p-1 rounded-md">
+                <option value="Medium">Medium (Shadow-md)</option>
+            </select>
+        </div>
+
+        <div class="bg-[#E6E6FA] w-1/2 rounded-md">
+            <p  class="bg-[#00BFFF] flex justify-center my-[30%] w-[70%] mx-auto p-4 rounded-md text-white">Alex Walker<br>
+                Full-Stack Web Developer building 
+                <br>awesome things with Tailwind CSS</p>
+        </div>
+    </div>
+
+    <!--Button-->
+
+    <footer class=" p-2">
+        <button class="bg-blue-500 text-white p-2 rounded-md" type="button">Submit</button>
+        <button class="bg-blue-500 text-white p-2 rounded-md" type="button">Hover Me Slowly</button>
+    </footer>
+   </div>
+</body>
+
+</html>

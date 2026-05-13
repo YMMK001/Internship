@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: rgb(193, 204, 204);
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 290px;
+            margin: auto;
+            background-color: rgb(247, 251, 251);
+            margin-top: 40px;
+            border-radius: 30px;
+            padding: 20px 10px;
+            box-shadow: 0px 10px 20px rgba(0,0,0,0.1);
+        }
+        .key {   
+            display: grid;
+            grid-template-rows: repeat(5, 60px);
+            grid-template-columns: repeat(4, 60px);
+            gap: 10px;
+            padding: 20px 0px 10px 5px;
+        }
+         
+        button {
+            border-radius: 50%;
+            border: none;
+            background-color: rgb(193, 226, 229);
+            font-weight: bold;
+            color: rgb(11, 73, 73);
+            font-size: 20px;
+            cursor: pointer;
+            transition: opacity 0.1s ease;
+        }
+        button:active {
+            opacity: 0.7;
+        }
+        input {
+            padding: 20px;
+            width: 100%;
+            height: 80px;
+            border: none;
+            border-radius: 20px;
+            background-color: #f0f4f4;
+            font-size: 28px;
+            text-align: right;
+            color: rgb(11, 73, 73);
+        }
+        input:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<>
+    <div class="container">
+        <input type="text" id="intertext" readonly>
+        <div class="key">
+            <button id="clearbtn">C</button>
+            <button id="deletebtn"><i class="fa-solid fa-delete-left"></i></button>
+            <button class="operatorbtn" data-val="%"><i class="fa-solid fa-percent"></i></button>
+            <button class="operatorbtn" data-val="/"><i class="fa-solid fa-divide"></i></button>
+            
+            <button class="inputbtn">7</button>
+            <button class="inputbtn">8</button>
+            <button class="inputbtn">9</button>
+            <button class="operatorbtn" data-val="*"><i class="fa-solid fa-xmark"></i></button>
+            
+            <button class="inputbtn">4</button>
+            <button class="inputbtn">5</button>
+            <button class="inputbtn">6</button>
+            <button class="operatorbtn" data-val="-"><i class="fa-solid fa-minus"></i></button>
+            
+            <button class="inputbtn">1</button>
+            <button class="inputbtn">2</button>
+            <button class="inputbtn">3</button>
+            <button class="operatorbtn" data-val="+"><i class="fa-solid fa-plus"></i></button>
+            
+            <button class="inputbtn">()</button>
+            <button class="inputbtn">0</button>
+            <button class="inputbtn">.</button>
+            <button id="equalbtn"><i class="fa-solid fa-equals"></i></button>
+        </div>
+    </div>
+    <script>
+    const display = document.getElementById("intertext");
+const inputButtons = document.querySelectorAll(".inputbtn");
+const operatorButtons = document.querySelectorAll(".operatorbtn");
+const equalBtn = document.getElementById("equalbtn");
+const deleteBtn = document.getElementById("deletebtn");
+const clearBtn = document.getElementById("clearbtn");
+
+let currentExpression = "";
+// Remainder symbol removed from normal arithmetic operations array
+const operators = ["+", "-", "*", "/"]; 
+
+function updatedisplay() {
+    display.value = currentExpression;
+}
+
+// Handle numbers, decimals, and brackets
+inputButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        let textToAppend = button.innerText;
+        const lastChar = currentExpression.slice(-1);
+
+        if (textToAppend === "()") {
+            const openCount = (currentExpression.match(/\(/g) || []).length;
+            const closeCount = (currentExpression.match(/\)/g) || []).length;
+
+            if (currentExpression === "" || operators.includes(lastChar) || lastChar === "%" || lastChar === "(") {
+                textToAppend = "(";
+            } else if (openCount > closeCount) {
+                textToAppend = ")";
+            } else {
+                textToAppend = "*(";
+            }
+        } 
+        else if (textToAppend === ".") {
+            if (lastChar === "." || currentExpression === "") return;
+            
+            const parts = currentExpression.split(/[\+\-\*\/%]/);
+            const currentNumberBlock = parts[parts.length - 1];
+            if (currentNumberBlock.includes(".")) return;
+        }
+
+        currentExpression += textToAppend;
+        updatedisplay();
+    });
+});
+
+// Handle mathematical operators with duplicate safety checks
+operatorButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        const val = button.getAttribute("data-val");
+        const lastChar = currentExpression.slice(-1);
+
+        // Prevent operator duplication next to each other
+        if (operators.includes(lastChar) || lastChar === "%") {
+            return; 
+        }
+
+        if (currentExpression !== "" || val === "-") {
+            currentExpression += val;
+            updatedisplay();
+        }
+    });
+});
+
+// Single character deletion
+deleteBtn.addEventListener("click", () => {
+    currentExpression = currentExpression.slice(0, -1);
+    updatedisplay();
+});
+
+// Clear everything
+clearBtn.addEventListener("click", () => {
+    currentExpression = "";
+    updatedisplay();
+});
+
+// The Percentage Calculation Engine 
+equalBtn.addEventListener("click", () => {
+    try {
+        if (currentExpression !== "") {
+            const lastChar = currentExpression.slice(-1);
+            if (operators.includes(lastChar)) return;
+
+            // PERCENT FUNCTION REGEX:
+            // This captures integer or decimal numbers immediately followed by "%"
+            // Example: converts "25%" into "(25/100)" before eval running
+            let formattedExpression = currentExpression.replace(/(\d+(\.\d+)?)%/g, "($1/100)");
+
+            // Run math calculation string safely
+            let result = eval(formattedExpression);
+            
+            // Fix JavaScript floating point decimal bugs
+            if (result % 1 !== 0) {
+                result = parseFloat(result.toFixed(8));
+            }
+
+            currentExpression = result.toString();
+            updatedisplay();
+        }
+    } catch (error) {
+        display.value = "Error";
+        currentExpression = "";
+    }
+});
+</script>
+</body>
+</html>

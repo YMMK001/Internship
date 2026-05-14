@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-200 p-4">    
+    <article class="bg-white flex w-1/2 mx-auto p-4 rounded-lg">
+        <section class=" bg-white flex flex-col w-1/2 gap-4 p-4">
+            <h1 class="font-bold text-2xl">Update variables</h1>
+
+            <label class="font-bold" for="inputname">Name (String):</label>
+            <input class="p-1 rounded-md border-2" type="text" value="" id="inputname">
+
+            <label class="font-bold" for="inputage">Age:(Number)</label>
+            <input class="p-1 rounded-md border-2" type="number" value="age" id="inputage">
+
+            <label class="font-bold ">VIP Status(Boolean):</label>
+            <input class="border-2" type="checkbox" id="checkbtn" >
+
+            <label class="font-bold">Color</label>
+            <input class="border-2" type="color" value="green" id="inputcolor" >
+        </section>
+
+        <section class="bg-white w-1/2 flex flex-col gap-4 pl-8 ">
+            <h1 class="font-bold text-2xl p-4">Live DOM Output</h1>
+           
+            <section class="bg-white p-8 border-black border-2 rounded-lg flex gap-2 flex-col">
+                <span class="bg-yellow-300 border-2 p-1 rounded-md">VIP Member</span>
+                <p class="" id="outname"></p>
+                <p class="" id="outage">Age <span>23</span></p>
+            </section>
+        </section>
+    </article>
+
+    <script>
+        const nameInput = document.getElementById("inputname");
+        const ageInput = document.getElementById("inputage");
+        const vipInput =document.querySelector('input[type="checkbox"]');
+
+        nameInput.addEventListener("input", function(){
+            const nameOutput = document.getElementById("outname");
+            nameOutput.textContent = "Name: " + nameInput.value;
+        })
+        ageInput.addEventListener("input", function(){
+            const ageOutput = document.getElementById("outage");
+            ageOutput.textContent = "Age: " + ageInput.value;
+        })
+        vipInput.addEventListener("change", function(){
+            if(vipInput.checked){
+                document.querySelector(".bg-yellow-300").style.display = "block";
+            }
+            else{
+                document.querySelector(".bg-yellow-300").style.display = "none";
+            }
+     
+        })
+        const colorInput = document.getElementById("inputcolor");
+        colorInput.addEventListener("input", function(){
+            const colorValue = colorInput.value;
+            document.querySelector(".bg-yellow-300").style.backgroundColor= colorValue;
+        })
+
+    </script>
+</body>
+</html>
